@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://boisterous-concha-ced153.netlify.app/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
