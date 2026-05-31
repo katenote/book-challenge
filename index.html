@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI 코딩 파트너 Antigravity와 함께하는 스마트하고 매끄러운 개발 여정. 초보자를 위한 단계별 설치 및 실전 활용 가이드를 제공합니다.">
+  <title>Antigravity Onboarding Hub - AI 코딩 파트너 초보 가이드북</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  
+  <!-- In Vite, styles can be loaded via JavaScript modules or standard links -->
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- Background Decorative Glowing Elements -->
+  <div class="cosmic-bg"></div>
+
+  <div class="container">
+    
+    <!-- Header Section -->
+    <header>
+      <div class="logo-container">
+        <div class="logo-icon">
+          <!-- Rocket/Space ship styled SVG icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A2,2 0 0,1 14,6A2,2 0 0,1 12,8A2,2 0 0,1 10,6A2,2 0 0,1 12,4M12,18C8.69,18 6,15.31 6,12C6,9.09 8.08,6.67 10.83,6.13C10.32,7.31 10,8.62 10,10C10,14.42 13.58,18 18,18C18,18 15.69,18 12,18Z" />
+          </svg>
+        </div>
+        <div class="logo-text">ANTIGRAVITY<span>.</span></div>
+      </div>
+      <h1>무중력 상태처럼 매끄러운 코딩의 시작</h1>
+      <p>강력하고 똑똑한 AI 개발 파트너 Antigravity의 세계에 오신 것을 환영합니다. 아래 로드맵을 따라 단 몇 분 만에 첫 코딩 여정을 설계해 보세요.</p>
+    </header>
+
+    <main>
+      
+      <!-- Stepper Section (4-Step Onboarding Roadmap) -->
+      <section id="onboarding-roadmap">
+        <h2 class="section-title"><span>01.</span> 온보딩 로드맵</h2>
+        <div class="stepper-container glass-card">
+          
+          <!-- Stepper Tab Navigation (Left Sidebar) -->
+          <div class="step-navigation">
+            <button class="step-tab active" data-step="1">
+              <span class="step-num">1</span>
+              <div class="step-info">
+                <h3>준비 & 진입</h3>
+                <p>작업 공간 설정하기</p>
+              </div>
+            </button>
+            <button class="step-tab" data-step="2">
+              <span class="step-num">2</span>
+              <div class="step-info">
+                <h3>도구 파악</h3>
+                <p>Antigravity 활성화</p>
+              </div>
+            </button>
+            <button class="step-tab" data-step="3">
+              <span class="step-num">3</span>
+              <div class="step-info">
+                <h3>첫 대화 시작</h3>
+                <p>페어 프로그래밍의 기초</p>
+              </div>
+            </button>
+            <button class="step-tab" data-step="4">
+              <span class="step-num">4</span>
+              <div class="step-info">
+                <h3>고급 협업</h3>
+                <p>계획 수립 및 자동화</p>
+              </div>
+            </button>
+          </div>
+          
+          <!-- Stepper Content (Right Panel) -->
+          <div class="step-content-wrapper">
+            
+            <!-- Step 1 Content -->
+            <div class="step-content active" id="step-1">
+              <div class="step-header">
+                <h2>1단계: 작업 공간(Workspace) 준비하기</h2>
+                <p>Antigravity는 실제 폴더의 모든 코드를 이해하고 작성하는 강력한 에이전트입니다.</p>
+              </div>
+              <div class="step-body">
+                <div class="step-details">
+                  <div class="instruction-item">
+                    <span class="instruction-badge">필수</span>
+                    <div class="instruction-text">
+                      <strong>빈 디렉토리(폴더)를 생성하세요.</strong><br>
+                      데스크톱이나 안전한 경로에 개발할 프로젝트 명으로 새로운 폴더를 생성합니다. (예: `my-awesome-app`)
+                    </div>
+                  </div>
+                  <div class="instruction-item">
+                    <span class="instruction-badge">연결</span>
+                    <div class="instruction-text">
+                      <strong>해당 폴더를 VS Code 등 편집기에서 여세요.</strong><br>
+                      Antigravity가 해당 위치를 기준으로 파일을 생성하고 실행 명령어를 제안할 수 있도록 폴더 구조가 지정됩니다.
+                    </div>
+                  </div>
+                </div>
+                <div class="step-media">
+                  <div class="code-header">
+                    <div class="code-dots">
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                    </div>
+                    <div class="code-title">Terminal</div>
+                  </div>
+                  <div class="code-block">
+<span class="comment"># 1. 새 프로젝트 폴더 만들기</span>
+<span class="command">mkdir</span> my-awesome-app
+<span class="command">cd</span> my-awesome-app
+
+<span class="comment"># 2. 에디터로 폴더 진입하기</span>
+<span class="command">code</span> .
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 Content -->
+            <div class="step-content" id="step-2">
+              <div class="step-header">
+                <h2>2단계: Antigravity와 인사하기</h2>
+                <p>설치된 시스템에서 Antigravity 에이전트를 불러와 대화를 시작할 수 있습니다.</p>
+              </div>
+              <div class="step-body">
+                <div class="step-details">
+                  <div class="instruction-item">
+                    <span class="instruction-badge">입력</span>
+                    <div class="instruction-text">
+                      <strong>채팅 창에 가벼운 인사를 건네보세요.</strong><br>
+                      "안녕 Antigravity!" 또는 "여기서 무엇을 할 수 있니?"라고 입력하여 대화창이 올바르게 연결되었는지 테스트합니다.
+                    </div>
+                  </div>
+                  <div class="instruction-item">
+                    <span class="instruction-badge">기반</span>
+                    <div class="instruction-text">
+                      <strong>시스템 상태를 자동으로 확인합니다.</strong><br>
+                      Antigravity는 사용자의 OS 종류(Windows 등)와 디렉토리 권한, 설정된 모델 정보를 로드하여 최적화된 상태로 대기합니다.
+                    </div>
+                  </div>
+                </div>
+                <div class="step-media">
+                  <div class="code-header">
+                    <div class="code-dots">
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                    </div>
+                    <div class="code-title">Antigravity System</div>
+                  </div>
+                  <div class="code-block">
+<span class="keyword">User:</span> 안녕
+<span class="keyword">System:</span> OS=Windows | Workspace=Active
+<span class="keyword">Antigravity:</span> 안녕하세요! 무엇을 만들어볼까요?
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3 Content -->
+            <div class="step-content" id="step-3">
+              <div class="step-header">
+                <h2>3단계: 페어 프로그래밍과 파일 생성</h2>
+                <p>단순 답변을 넘어, Antigravity가 직접 개발 환경에 파일을 구성합니다.</p>
+              </div>
+              <div class="step-body">
+                <div class="step-details">
+                  <div class="instruction-item">
+                    <span class="instruction-badge">요청</span>
+                    <div class="instruction-text">
+                      <strong>구체적인 기능을 한글로 요청해 보세요.</strong><br>
+                      "HTML/CSS로 예쁜 카운터 앱 만들어줘" 같이 만들고자 하는 프로그램의 기능을 자연어로 명확하게 지시합니다.
+                    </div>
+                  </div>
+                  <div class="instruction-item">
+                    <span class="instruction-badge">생성</span>
+                    <div class="instruction-text">
+                      <strong>실시간 파일 작성 및 코드 삽입을 지켜봅니다.</strong><br>
+                      가이드된 코드를 직접 복사/붙여넣기 할 필요 없이, Antigravity가 작업 공간에 완벽한 코드 파일을 조립해 나갑니다.
+                    </div>
+                  </div>
+                </div>
+                <div class="step-media">
+                  <div class="code-header">
+                    <div class="code-dots">
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                    </div>
+                    <div class="code-title">Action log</div>
+                  </div>
+                  <div class="code-block">
+⚙️ <span class="string">Tool call: write_to_file</span>
+📁 Path: <span class="accent">/index.html</span>
+✅ Status: <span class="string">Success</span>
+⚙️ <span class="string">Tool call: write_to_file</span>
+📁 Path: <span class="accent">/style.css</span>
+✅ Status: <span class="string">Success</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 Content -->
+            <div class="step-content" id="step-4">
+              <div class="step-header">
+                <h2>4단계: 스마트한 계획 수립과 도구 활용</h2>
+                <p>계획 모드(Planning Mode)를 통해 더 복잡하고 안정성 높은 개발 프로세스를 유지합니다.</p>
+              </div>
+              <div class="step-body">
+                <div class="step-details">
+                  <div class="instruction-item">
+                    <span class="instruction-badge">계획</span>
+                    <div class="instruction-text">
+                      <strong>큰 규모의 수정에는 계획 모드가 켜집니다.</strong><br>
+                      Antigravity는 복잡한 변경을 시작하기 전, `implementation_plan.md` 파일을 생성하여 사용자 승인을 먼저 받습니다.
+                    </div>
+                  </div>
+                  <div class="instruction-item">
+                    <span class="instruction-badge">자동화</span>
+                    <div class="instruction-text">
+                      <strong>터미널 실행 및 수동 빌드를 위임하세요.</strong><br>
+                      `npm run dev`나 Python 스크립트 실행 등 복잡한 실행 명령어도 Antigravity가 안전하게 구성하여 쉘에서 구동합니다.
+                    </div>
+                  </div>
+                </div>
+                <div class="step-media">
+                  <div class="code-header">
+                    <div class="code-dots">
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                      <div class="code-dot"></div>
+                    </div>
+                    <div class="code-title">Planning Mode</div>
+                  </div>
+                  <div class="code-block">
+📝 <span class="keyword">Created:</span> implementation_plan.md
+📝 <span class="keyword">Created:</span> task.md
+🚀 <span class="comment">Waiting for user approval...</span>
+⚡ <span class="string">User approved! Executing tasks...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stepper Navigation Buttons -->
+            <div class="step-actions">
+              <button class="btn" id="prev-btn" disabled>
+                <!-- Left arrow svg -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                이전 단계
+              </button>
+              <button class="btn btn-primary" id="next-btn">
+                다음 단계
+                <!-- Right arrow svg -->
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+            
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Prompt Simulator Section -->
+      <section id="prompt-simulator">
+        <h2 class="section-title"><span>02.</span> 실시간 프롬프트 시뮬레이터</h2>
+        <div class="simulator-layout">
+          
+          <!-- Prompt sidebar list -->
+          <div class="prompt-sidebar">
+            <button class="prompt-pill active" data-scenario="greeting">
+              <div class="pill-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                인사 & 기능 탐색
+              </div>
+              <div class="pill-desc">Antigravity와 첫 연결을 시도하고 대화를 시작합니다.</div>
+            </button>
+            <button class="prompt-pill" data-scenario="counter-app">
+              <div class="pill-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                HTML 카운터 제작
+              </div>
+              <div class="pill-desc">간단한 카운터 웹앱을 한 번에 작성하도록 지시합니다.</div>
+            </button>
+            <button class="prompt-pill" data-scenario="debug-issue">
+              <div class="pill-title">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 8h-2.08c-.13-.33-.31-.63-.53-.91l1.39-1.39c.39-.39.39-1.02 0-1.41a.995.995 0 0 0-1.41 0l-1.39 1.39c-.28-.22-.58-.4-.91-.53V3c0-.55-.45-1-1-1s-1 .45-1 1v2.08c-.33.13-.63.31-.91.53L8.7 4.29a.995.995 0 0 0-1.41 0c-.39.39-.39 1.02 0 1.41l1.39 1.39c-.22.28-.4.58-.53.91H6c-.55 0-1 .45-1 1s.45 1 1 1h2.08c.13.33.31.63.53.91l-1.39 1.39a.995.995 0 0 0 0 1.41c.39.39 1.02.39 1.41 0l1.39-1.39c.28.22.58.4.91.53V21c0 .55.45 1 1 1s1-.45 1-1v-2.08c.33-.13.63-.31.91-.53l1.39 1.39c.39.39 1.02.39 1.41 0c.39-.39.39-1.02 0-1.41l-1.39-1.39c.22-.28.4-.58.53-.91H18c.55 0 1-.45 1-1s-.45-1-1-1zm-7 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+                에러 디버깅 요청
+              </div>
+              <div class="pill-desc">작성 중인 코드의 에러를 찾고 고치도록 의뢰합니다.</div>
+            </button>
+          </div>
+          
+          <!-- Terminal window on the right -->
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="code-dots">
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+                <div class="code-dot"></div>
+              </div>
+              <div class="terminal-title">Antigravity Console (Simulation)</div>
+            </div>
+            <div class="terminal-body" id="terminal-screen">
+              <!-- Content dynamically generated by JS -->
+            </div>
+          </div>
+          
+        </div>
+      </section>
+
+      <!-- Slash Commands Section -->
+      <section id="slash-commands">
+        <h2 class="section-title"><span>03.</span> 필수 슬래시 명령어 도감</h2>
+        <div class="commands-grid">
+          
+          <!-- Goal Command Card -->
+          <div class="command-card glass-card">
+            <div class="command-header">
+              <span class="command-trigger">/goal</span>
+              <svg class="command-icon" viewBox="0 0 24 24"><path d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z"/></svg>
+            </div>
+            <p class="command-desc">시간이 오래 걸리거나 깊은 탐색이 필요한 복잡한 목표가 있을 때 사용합니다. 에이전트가 극도로 꼼꼼하게 끝까지 추적합니다.</p>
+            <div class="command-example">
+              <span>입력 예시:</span><br>
+              "/goal 이 프로젝트에 테스트 코드를 완벽하게 추가하고 커밋해줘"
+            </div>
+          </div>
+
+          <!-- Schedule Command Card -->
+          <div class="command-card glass-card">
+            <div class="command-header">
+              <span class="command-trigger">/schedule</span>
+              <svg class="command-icon" viewBox="0 0 24 24"><path d="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8m0-18c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2m1 5h-2v5h4v-2h-2V7z"/></svg>
+            </div>
+            <p class="command-desc">특정 타이머를 설정해두고 작업을 연기하거나, 주기적으로 상태 체크가 필요할 때 백그라운드 작업을 실행합니다.</p>
+            <div class="command-example">
+              <span>입력 예시:</span><br>
+              "/schedule 1분 후에 현재 빌드가 완료되었는지 검사해줘"
+            </div>
+          </div>
+
+          <!-- Browser Command Card -->
+          <div class="command-card glass-card">
+            <div class="command-header">
+              <span class="command-trigger">/browser</span>
+              <svg class="command-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </div>
+            <p class="command-desc">인터넷 브라우징, 신규 오픈소스 명세 문서 탐색, 리액트 웹 뷰 스크린샷 캡처 및 레이아웃 상태를 평가할 때 사용합니다.</p>
+            <div class="command-example">
+              <span>입력 예시:</span><br>
+              "/browser 최신 MDN의 CSS grid 속성에 대해 찾아서 요약해줘"
+            </div>
+          </div>
+
+          <!-- Grill Me Command Card -->
+          <div class="command-card glass-card">
+            <div class="command-header">
+              <span class="command-trigger">/grill-me</span>
+              <svg class="command-icon" viewBox="0 0 24 24"><path d="M12,6A3,3 0 0,0 9,9A3,3 0 0,0 12,12A3,3 0 0,0 15,9A3,3 0 0,0 12,6M6,8.17A2.5,2.5 0 0,0 3.5,10.67A2.5,2.5 0 0,0 6,13.17A2.5,2.5 0 0,0 8.5,10.67A2.5,2.5 0 0,0 6,8.17M18,8.17A2.5,2.5 0 0,0 15.5,10.67A2.5,2.5 0 0,0 18,13.17A2.5,2.5 0 0,0 20.5,10.67A2.5,2.5 0 0,0 18,8.17M12,14C10,14 6,15 6,17V19H18V17C18,15 14,14 12,14M6,14.6C4.7,14.7 1.5,15.3 1.5,16.8V19H4.5V17C4.5,16 5.1,15.2 6,14.6M18,14.6C18.9,15.2 19.5,16 19.5,17V19H22.5V16.8C22.5,15.3 19.3,14.7 18,14.6Z"/></svg>
+            </div>
+            <p class="command-desc">요구 사항이 다소 모호하거나 복잡할 때 대화형 심층 인터뷰를 진행하여 최적의 비즈니스 논리와 테마를 정립합니다.</p>
+            <div class="command-example">
+              <span>입력 예시:</span><br>
+              "/grill-me 쇼핑몰의 세부 기획과 데이터베이스 구조를 같이 정해줘"
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Checklist Section -->
+      <section id="onboarding-checklist">
+        <h2 class="section-title"><span>04.</span> 실전 온보딩 퀘스트</h2>
+        <div class="checklist-layout">
+          
+          <!-- Checklists -->
+          <div class="checklist-wrapper" id="quest-list">
+            <div class="checklist-item" data-id="q1">
+              <div class="checkbox-custom">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <span class="checklist-text">로컬 데스크톱에 새 디렉토리 폴더를 생성하고 에디터로 오픈하기</span>
+            </div>
+            <div class="checklist-item" data-id="q2">
+              <div class="checkbox-custom">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <span class="checklist-text">Antigravity 채팅창에 첫 인사("안녕!")를 남겨 연결 확인하기</span>
+            </div>
+            <div class="checklist-item" data-id="q3">
+              <div class="checkbox-custom">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <span class="checklist-text">프롬프트 시뮬레이터 탭을 눌러 타이핑 흐름 직접 경험해보기</span>
+            </div>
+            <div class="checklist-item" data-id="q4">
+              <div class="checkbox-custom">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <span class="checklist-text">Antigravity에게 만들고 싶은 앱에 대해 설명하고 첫 파일 제작 지시하기</span>
+            </div>
+            <div class="checklist-item" data-id="q5">
+              <div class="checkbox-custom">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+              </div>
+              <span class="checklist-text">슬래시 명령어 도감을 클릭해서 필요한 주요 명령의 예제 읽기</span>
+            </div>
+          </div>
+          
+          <!-- Progress Card -->
+          <div class="progress-card glass-card">
+            <div class="progress-radial">
+              <svg class="progress-svg" viewBox="0 0 100 100">
+                <defs>
+                  <linearGradient id="progress-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="var(--primary)" />
+                    <stop offset="100%" stop-color="var(--accent)" />
+                  </linearGradient>
+                </defs>
+                <circle class="progress-bg-circle" cx="50" cy="50" r="42" />
+                <circle class="progress-value-circle" id="progress-indicator" cx="50" cy="50" r="42" stroke-dasharray="263.89" stroke-dashoffset="263.89" />
+              </svg>
+              <div class="progress-percent" id="progress-text">0%</div>
+            </div>
+            <h3 class="progress-status-title" id="progress-title">무중력 여행자</h3>
+            <p class="progress-status-desc" id="progress-desc">퀘스트 항목을 수행하여 개발 중력을 이겨내고 무중력 궤도에 진입해 보세요!</p>
+          </div>
+          
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <p>© 2026 Antigravity Co-Pilot. Designed elegantly inside Space-Orbit.</p>
+      <p>Powered by Google DeepMind's Advanced Agentic Coding.</p>
+    </footer>
+
+  </div>
+
+  <!-- In Vite, modules are linked here -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
