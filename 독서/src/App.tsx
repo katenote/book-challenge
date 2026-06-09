@@ -77,8 +77,7 @@ function App() {
   };
 
   // Delete profile
-  const handleDeleteProfile = (e: React.MouseEvent, profileName: string) => {
-    e.stopPropagation();
+  const handleDeleteProfile = (profileName: string) => {
     if (profileName === '기본 탐험가') {
       alert('기본 탐험가는 삭제할 수 없어요! 🚀');
       return;
@@ -185,18 +184,23 @@ function App() {
                       {profiles.map((p) => (
                         <div
                           key={p}
-                          onClick={() => switchProfile(p)}
-                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold cursor-pointer transition-all ${
+                          className={`flex items-center justify-between px-3 py-1 rounded-xl text-xs font-bold transition-all ${
                             activeProfile === p
                               ? 'bg-indigo-600 text-white'
                               : 'text-indigo-100 hover:bg-white hover:bg-opacity-5'
                           }`}
                         >
-                          <span className="truncate">👦 {p}</span>
+                          <button
+                            onClick={() => switchProfile(p)}
+                            className="flex-1 text-left py-1.5 truncate flex items-center gap-1.5 focus:outline-none"
+                          >
+                            <span>👦</span>
+                            <span className="truncate">{p}</span>
+                          </button>
                           {p !== '기본 탐험가' && (
                             <button
-                              onClick={(e) => handleDeleteProfile(e, p)}
-                              className="p-1 hover:bg-rose-600 hover:text-white text-rose-400 rounded-md transition-colors"
+                              onClick={() => handleDeleteProfile(p)}
+                              className="p-1 hover:bg-rose-600 hover:text-white text-rose-400 rounded-md transition-colors shrink-0 ml-2"
                               title="탐험가 삭제"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
