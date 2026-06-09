@@ -139,12 +139,15 @@ function App() {
   return (
     <div className="min-height-screen pb-16 flex flex-col justify-between">
       {/* Galaxy Header */}
-      <header className="bg-gradient-to-r from-space-900 via-indigo-950 to-space-900 text-white py-12 px-6 shadow-xl relative overflow-hidden rounded-b-[3rem] border-b-8 border-indigo-500">
-        {/* Floating Stars */}
-        <div className="absolute top-6 left-12 text-yellow-200 text-3xl animate-twinkle">★</div>
-        <div className="absolute top-24 right-16 text-yellow-100 text-xl animate-twinkle" style={{ animationDelay: '1.2s' }}>✦</div>
-        <div className="absolute bottom-8 left-1/4 text-indigo-300 text-2xl animate-float" style={{ animationDuration: '6s' }}>🪐</div>
-        <div className="absolute top-10 right-1/3 text-pink-300 text-lg animate-float" style={{ animationDuration: '8s' }}>☄️</div>
+      <header className="bg-gradient-to-r from-space-900 via-indigo-950 to-space-900 text-white py-12 px-6 shadow-xl relative rounded-b-[3rem] border-b-8 border-indigo-500">
+        {/* Decorative background overlay that doesn't restrict dropdown overflows */}
+        <div className="absolute inset-0 overflow-hidden rounded-b-[3rem] pointer-events-none z-0">
+          {/* Floating Stars */}
+          <div className="absolute top-6 left-12 text-yellow-200 text-3xl animate-twinkle">★</div>
+          <div className="absolute top-24 right-16 text-yellow-100 text-xl animate-twinkle" style={{ animationDelay: '1.2s' }}>✦</div>
+          <div className="absolute bottom-8 left-1/4 text-indigo-300 text-2xl animate-float" style={{ animationDuration: '6s' }}>🪐</div>
+          <div className="absolute top-10 right-1/3 text-pink-300 text-lg animate-float" style={{ animationDuration: '8s' }}>☄️</div>
+        </div>
 
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 relative z-10">
           <div className="text-center md:text-left space-y-2">
