@@ -1,6 +1,8 @@
 import type { BookRecord, ReadingBadge, UserStats } from '../types/book';
 
-const STORAGE_KEY = 'kids_reading_log_records';
+const STORAGE_KEY_PREFIX = 'kids_reading_log_records_';
+const PROFILES_KEY = 'kids_reading_profiles';
+const ACTIVE_PROFILE_KEY = 'kids_reading_active_profile';
 
 export const initialBadges: ReadingBadge[] = [
   {
@@ -40,19 +42,42 @@ export const initialBadges: ReadingBadge[] = [
   },
 ];
 
-export const getBookRecords = (): BookRecord[] => {
-  const data = localStorage.getItem(STORAGE_KEY);
+export const getBookRecords = (profileName: string): BookRecord[] => {
+  const data = localStorage.getItem(STORAGE_KEY_PREFIX + profileName);
   if (!data) return [];
   try {
     return JSON.parse(data);
   } catch (e) {
-    console.error('Error parsing book records:', e);
+    console.error('Error parsing book records for profile:', profileName, e);
     return [];
   }
 };
 
-export const saveBookRecords = (records: BookRecord[]): void => {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+export const saveBookRecords = (profileName: string, records: BookRecord[]): void => {
+  localStorage.setItem(STORAGE_KEY_PREFIX + profileName, JSON.stringify(records));
+};
+
+export const getProfiles = (): string[] => {
+  const data = localStorage.getItem(PROFILES_KEY);
+  if (!data) return ['기본 탐험가'];
+  try {
+    return JSON.parse(data);
+  } catch (e) {
+    console.error('Error parsing profiles:', e);
+    return ['기본 탐험가'];
+  }
+};
+
+export const saveProfiles = (profiles: string[]): void => {
+  localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
+};
+
+export const getActiveProfile = (): string => {
+  return localStorage.getItem(ACTIVE_PROFILE_KEY) || '기본 탐험가';
+};
+
+export const saveActiveProfile = (profile: string): void => {
+  localStorage.setItem(ACTIVE_PROFILE_KEY, profile);
 };
 
 export const getStats = (records: BookRecord[]): UserStats => {

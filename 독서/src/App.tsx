@@ -1,31 +1,99 @@
 import { useState, useEffect } from 'react';
 import type { BookRecord } from './types/book';
-import { getBookRecords, saveBookRecords, getStats, initialMockBooks } from './utils/storage';
+import { 
+  getBookRecords, 
+  saveBookRecords, 
+  getStats, 
+  initialMockBooks,
+  getProfiles,
+  saveProfiles,
+  getActiveProfile,
+  saveActiveProfile
+} from './utils/storage';
 import { Dashboard } from './components/Dashboard';
 import { BookList } from './components/BookList';
 import { BookForm } from './components/BookForm';
 import { BookDetail } from './components/BookDetail';
-import { Rocket, BookOpen, Plus, Heart } from 'lucide-react';
+import { Rocket, BookOpen, Plus, Heart, Users, Trash2 } from 'lucide-react';
 import './App.css'; // Just in case, although empty
 
 function App() {
   const [records, setRecords] = useState<BookRecord[]>([]);
+  const [profiles, setProfiles] = useState<string[]>([]);
+  const [activeProfile, setActiveProfile] = useState<string>('기본 탐험가');
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [newProfileName, setNewProfileName] = useState('');
   const [activeTab, setActiveTab] = useState<'dashboard' | 'bookshelf'>('dashboard');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState<BookRecord | null>(null);
   const [editingBook, setEditingBook] = useState<BookRecord | null>(null);
 
-  // Initialize records from localStorage or mock data
+  // Initialize profiles and records on mount
   useEffect(() => {
-    const saved = getBookRecords();
-    if (saved.length === 0) {
+    const loadedProfiles = getProfiles();
+    const loadedActive = getActiveProfile();
+    setProfiles(loadedProfiles);
+    setActiveProfile(loadedActive);
+
+    const saved = getBookRecords(loadedActive);
+    if (loadedActive === '기본 탐험가' && saved.length === 0) {
       setRecords(initialMockBooks);
-      saveBookRecords(initialMockBooks);
+      saveBookRecords('기본 탐험가', initialMockBooks);
     } else {
       setRecords(saved);
     }
   }, []);
+
+  // Switch active profile and reload records
+  const switchProfile = (profileName: string) => {
+    setActiveProfile(profileName);
+    saveActiveProfile(profileName);
+    const saved = getBookRecords(profileName);
+    
+    // Automatically load mock data only if '기본 탐험가' is empty
+    if (profileName === '기본 탐험가' && saved.length === 0) {
+      setRecords(initialMockBooks);
+      saveBookRecords('기본 탐험가', initialMockBooks);
+    } else {
+      setRecords(saved);
+    }
+    setIsProfileDropdownOpen(false);
+  };
+
+  // Create new profile
+  const handleCreateProfile = () => {
+    const name = newProfileName.trim();
+    if (!name) return;
+    if (profiles.includes(name)) {
+      alert('이미 존재하는 탐험가 이름이에요! 다른 이름을 입력해 주세요. 💫');
+      return;
+    }
+    const updatedProfiles = [...profiles, name];
+    setProfiles(updatedProfiles);
+    saveProfiles(updatedProfiles);
+    setNewProfileName('');
+    switchProfile(name);
+  };
+
+  // Delete profile
+  const handleDeleteProfile = (e: React.MouseEvent, profileName: string) => {
+    e.stopPropagation();
+    if (profileName === '기본 탐험가') {
+      alert('기본 탐험가는 삭제할 수 없어요! 🚀');
+      return;
+    }
+    if (confirm(`'${profileName}' 탐험가를 지울까요? 지우면 해당 탐험가의 책 기록이 완전히 삭제돼요! 😢`)) {
+      const updatedProfiles = profiles.filter((p) => p !== profileName);
+      setProfiles(updatedProfiles);
+      saveProfiles(updatedProfiles);
+      localStorage.removeItem('kids_reading_log_records_' + profileName);
+
+      if (activeProfile === profileName) {
+        switchProfile('기본 탐험가');
+      }
+    }
+  };
 
   const handleSaveBook = (newRecord: BookRecord) => {
     let updatedRecords: BookRecord[];
@@ -38,13 +106,13 @@ function App() {
       updatedRecords = [newRecord, ...records];
     }
     setRecords(updatedRecords);
-    saveBookRecords(updatedRecords);
+    saveBookRecords(activeProfile, updatedRecords);
   };
 
   const handleDeleteBook = (id: string) => {
     const updatedRecords = records.filter((r) => r.id !== id);
     setRecords(updatedRecords);
-    saveBookRecords(updatedRecords);
+    saveBookRecords(activeProfile, updatedRecords);
     if (selectedBook?.id === id) {
       setSelectedBook(null);
       setIsDetailOpen(false);
@@ -89,28 +157,99 @@ function App() {
             </p>
           </div>
 
-          {/* Galaxy Nav Tabs */}
-          <div className="flex bg-white bg-opacity-10 backdrop-blur-md p-1.5 rounded-2xl border border-white border-opacity-20 shadow-lg">
-            <button
-              onClick={() => setActiveTab('dashboard')}
-              className={`px-5 py-2.5 rounded-xl font-black text-sm flex items-center gap-2 transition-all ${
-                activeTab === 'dashboard'
-                  ? 'bg-white text-indigo-950 shadow-md scale-105'
-                  : 'text-indigo-100 hover:text-white hover:bg-white hover:bg-opacity-5'
-              }`}
-            >
-              <Rocket className="w-4 h-4" /> 우주 기지
-            </button>
-            <button
-              onClick={() => setActiveTab('bookshelf')}
-              className={`px-5 py-2.5 rounded-xl font-black text-sm flex items-center gap-2 transition-all ${
-                activeTab === 'bookshelf'
-                  ? 'bg-white text-indigo-950 shadow-md scale-105'
-                  : 'text-indigo-100 hover:text-white hover:bg-white hover:bg-opacity-5'
-              }`}
-            >
-              <BookOpen className="w-4 h-4" /> 나의 책장
-            </button>
+          {/* Navigation and Switcher Group */}
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {/* Profile Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+                className="px-4 py-2.5 rounded-2xl bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 hover:bg-opacity-20 text-white font-black text-sm flex items-center gap-2 transition-all active:scale-95"
+              >
+                <Users className="w-4 h-4 text-pink-300" />
+                <span>👦 {activeProfile}</span>
+              </button>
+
+              {isProfileDropdownOpen && (
+                <>
+                  {/* Backdrop overlay to close dropdown on outer click */}
+                  <div className="fixed inset-0 z-40" onClick={() => setIsProfileDropdownOpen(false)}></div>
+                  
+                  <div className="absolute right-0 mt-2 w-56 bg-slate-900 bg-opacity-95 backdrop-blur-lg border border-indigo-500 border-opacity-30 rounded-2xl p-3 shadow-2xl z-50 text-left space-y-2">
+                    <div className="text-[10px] text-indigo-300 font-black px-1 pb-1 border-b border-indigo-950 border-opacity-40">
+                      탐험가 선택하기
+                    </div>
+                    <div className="max-h-40 overflow-y-auto space-y-1">
+                      {profiles.map((p) => (
+                        <div
+                          key={p}
+                          onClick={() => switchProfile(p)}
+                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold cursor-pointer transition-all ${
+                            activeProfile === p
+                              ? 'bg-indigo-600 text-white'
+                              : 'text-indigo-100 hover:bg-white hover:bg-opacity-5'
+                          }`}
+                        >
+                          <span className="truncate">👦 {p}</span>
+                          {p !== '기본 탐험가' && (
+                            <button
+                              onClick={(e) => handleDeleteProfile(e, p)}
+                              className="p-1 hover:bg-rose-600 hover:text-white text-rose-400 rounded-md transition-colors"
+                              title="탐험가 삭제"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    
+                    {/* Create New Profile */}
+                    <div className="pt-2 border-t border-indigo-950 border-opacity-40">
+                      <div className="flex gap-1.5">
+                        <input
+                          type="text"
+                          placeholder="이름 입력 (예: 민수)"
+                          value={newProfileName}
+                          onChange={(e) => setNewProfileName(e.target.value)}
+                          onKeyDown={(e) => e.key === 'Enter' && handleCreateProfile()}
+                          className="flex-1 px-2.5 py-1.5 text-xs rounded-xl text-slate-800 focus:outline-none bg-indigo-50 font-bold"
+                        />
+                        <button
+                          onClick={handleCreateProfile}
+                          className="bg-indigo-500 hover:bg-indigo-600 px-3 py-1.5 text-xs rounded-xl font-black text-white shrink-0"
+                        >
+                          등록
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Galaxy Nav Tabs */}
+            <div className="flex bg-white bg-opacity-10 backdrop-blur-md p-1.5 rounded-2xl border border-white border-opacity-20 shadow-lg">
+              <button
+                onClick={() => setActiveTab('dashboard')}
+                className={`px-5 py-2.5 rounded-xl font-black text-sm flex items-center gap-2 transition-all ${
+                  activeTab === 'dashboard'
+                    ? 'bg-white text-indigo-950 shadow-md scale-105'
+                    : 'text-indigo-100 hover:text-white hover:bg-white hover:bg-opacity-5'
+                }`}
+              >
+                <Rocket className="w-4 h-4" /> 우주 기지
+              </button>
+              <button
+                onClick={() => setActiveTab('bookshelf')}
+                className={`px-5 py-2.5 rounded-xl font-black text-sm flex items-center gap-2 transition-all ${
+                  activeTab === 'bookshelf'
+                    ? 'bg-white text-indigo-950 shadow-md scale-105'
+                    : 'text-indigo-100 hover:text-white hover:bg-white hover:bg-opacity-5'
+                }`}
+              >
+                <BookOpen className="w-4 h-4" /> 나의 책장
+              </button>
+            </div>
           </div>
         </div>
       </header>
