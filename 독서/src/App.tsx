@@ -23,6 +23,7 @@ function App() {
   const [activeProfile, setActiveProfile] = useState<string>('기본 탐험가');
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [newProfileName, setNewProfileName] = useState('');
+  const [profileToDelete, setProfileToDelete] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'dashboard' | 'bookshelf'>('dashboard');
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -76,22 +77,27 @@ function App() {
     switchProfile(name);
   };
 
-  // Delete profile
-  const handleDeleteProfile = (profileName: string) => {
+  // Delete profile click
+  const handleDeleteProfileClick = (profileName: string) => {
     if (profileName === '기본 탐험가') {
       alert('기본 탐험가는 삭제할 수 없어요! 🚀');
       return;
     }
-    if (confirm(`'${profileName}' 탐험가를 지울까요? 지우면 해당 탐험가의 책 기록이 완전히 삭제돼요! 😢`)) {
-      const updatedProfiles = profiles.filter((p) => p !== profileName);
-      setProfiles(updatedProfiles);
-      saveProfiles(updatedProfiles);
-      localStorage.removeItem('kids_reading_log_records_' + profileName);
+    setProfileToDelete(profileName);
+  };
 
-      if (activeProfile === profileName) {
-        switchProfile('기본 탐험가');
-      }
+  // Confirm delete profile
+  const confirmDeleteProfile = () => {
+    if (!profileToDelete) return;
+    const updatedProfiles = profiles.filter((p) => p !== profileToDelete);
+    setProfiles(updatedProfiles);
+    saveProfiles(updatedProfiles);
+    localStorage.removeItem('kids_reading_log_records_' + profileToDelete);
+
+    if (activeProfile === profileToDelete) {
+      switchProfile('기본 탐험가');
     }
+    setProfileToDelete(null);
   };
 
   const handleSaveBook = (newRecord: BookRecord) => {
@@ -199,7 +205,7 @@ function App() {
                           </button>
                           {p !== '기본 탐험가' && (
                             <button
-                              onClick={() => handleDeleteProfile(p)}
+                              onClick={() => handleDeleteProfileClick(p)}
                               className="p-1 hover:bg-rose-600 hover:text-white text-rose-400 rounded-md transition-colors shrink-0 ml-2"
                               title="탐험가 삭제"
                             >
@@ -313,6 +319,34 @@ function App() {
         }}
         onDelete={handleDeleteBook}
       />
+
+      {/* Custom Delete Profile Confirmation Modal */}
+      {profileToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900 bg-opacity-60 backdrop-blur-sm">
+          <div className="bg-white rounded-3xl w-full max-w-sm shadow-2xl border-4 border-indigo-200 p-6 text-center space-y-5">
+            <div className="text-5xl animate-bounce" style={{ animationDuration: '3s' }}>😢</div>
+            <h3 className="text-xl font-black text-slate-800">정말 지울까요?</h3>
+            <p className="text-sm text-slate-500 font-bold leading-relaxed">
+              <span className="text-indigo-600">'{profileToDelete}'</span> 탐험가를 지울까요?<br />
+              지우면 읽은 책 기록과 뱃지가 완전히 사라져요!
+            </p>
+            <div className="flex gap-3 pt-2">
+              <button
+                onClick={() => setProfileToDelete(null)}
+                className="flex-1 py-3 rounded-2xl border-2 border-slate-200 hover:bg-slate-50 text-slate-500 font-black text-sm transition-colors"
+              >
+                안 지울래요
+              </button>
+              <button
+                onClick={confirmDeleteProfile}
+                className="flex-1 py-3 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-black text-sm transition-transform active:translate-y-1 shadow-md"
+              >
+                지울래요!
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
